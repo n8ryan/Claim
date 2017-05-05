@@ -1,0 +1,23 @@
+create an id for a customer
+create an id for a book (can be more than 1 of same book)
+
+copy array:
+tempArray = new int[myArray.len+1]
+
+loop to find in array of booklog:
+loop:
+	if(customer.equal(myArray[i]{
+		myArray[i].addBookLog //in CustomerProfile
+		(book);
+		return;
+	}
+
+update a book to see if it's checked in:
+loop:
+	if(customer.equal(myArray[i]{
+		Booklog[]log myArray[i].get booklogs[i]
+		loop booklogs
+			if booklogs[j].betBook.equals(book){
+				booklogs[j].set returndate = now;
+			}
+		}
