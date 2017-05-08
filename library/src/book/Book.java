@@ -1,23 +1,28 @@
 package book;
 
-import customer.Customer;
-
 public class Book {
 	private String author;
 	private String isbn;
 	private String title;
 	private int numberOfPages;
-	private Customer isOut;
+	private String id;
 	
 	public Book(){}
 	
-	public Book(String isbn, String title, String author, int numberOfPages){
+	public Book(String id, String isbn, String title, String author, int numberOfPages){
+		this.id = id;
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
 		this.numberOfPages = numberOfPages;
 	}
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getAuthor() {
 		return this.author;
 	}
@@ -42,15 +47,20 @@ public class Book {
 	public void setNumberOfPages(int numberOfPages) {
 		this.numberOfPages = numberOfPages;
 	}
-	public Customer getIsOut() {
-		return this.isOut;
-	}
-	public void setIsOut(Customer isOut) {
-		this.isOut = isOut;
-	}
+
 	public String toString() { 
         return "\"" + this.getTitle() + "\" by " + this.getAuthor(); 
     } 
 
 	//need equal
+	public boolean equal(Book other) {
+	    if (other == null) {
+	        return false;
+	    }
+	    if (this.id != other.id){
+	        return false;
+	    }
+	   
+	    return true;
+	}
 }

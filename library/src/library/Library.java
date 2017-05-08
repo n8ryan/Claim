@@ -16,9 +16,14 @@ public class Library {
 	
 	//Constructors
 	public Library(){}
-	public Library(String name, ArrayList<Book> books, ArrayList<CustomerProfile> customerProfiles){
+	
+	public Library(String name){
+		this.name = name;
+	}
+	public Library(String name, ArrayList<Book> books, ArrayList<Customer> customerList, ArrayList<CustomerProfile> customerProfiles){
 		this.name = name;
 		this.books = books;
+		this.customers = customerList;
 		this.customerProfiles = customerProfiles;
 	}
 
@@ -61,27 +66,44 @@ public class Library {
 		int count = books.size();
 		return count;
 	}
-	public void addCustomer(Customer c){
-		this.customers.add(c);
+	public void addCustomer(String name, String cardNumber){
+		Customer customer = new Customer(name, cardNumber);
+		this.customers.add(customer);
+		addToCustomerProfiles(customer,null);
 	}
 	public void removeCustomer(Customer c){
 		if(this.customers.contains(c)){
 			this.customers.remove(c);
 		}
 	}
-	public int customerCount(){
-		int count = customers.size();
-		return count;
-	}
 	public void addToCustomerProfiles(Customer customer, ArrayList<BookLog> bookLog){
 		CustomerProfile customerProfile = new CustomerProfile(customer, bookLog);
 		this.customerProfiles.add(customerProfile);
 	}
-	public void checkOutBook(CustomerProfile customerProfile, Book book){
+	public void removeFromCustomerProfiles(String customerName){
+		for(CustomerProfile cp : this.customerProfiles){
+			if(cp.getCustomer().getName().equals(customerName)){
+				this.customerProfiles.remove(cp);
+				break;
+			}
+		}
+		
+	}
+	public int customerCount(){
+		int count = customers.size();
+		return count;
+	}
+	public void checkOutBook(CustomerProfile customerProfile, Book book){ //need more
 		customerProfile.addToBookLogs(book, new Date());
 	}
 	public void checkInBook(CustomerProfile customerProfile, Book book){
 		ArrayList<BookLog> bookLogs = customerProfile.getBookLogs();
+		for(BookLog bl : bookLogs){
+			if(bl.getBook().equals(book)){
+				bookLogs.remove(bl);
+				break;
+			}
+		}
 		if(bookLogs.contains(book)){
 			bookLogs.remove(book);
 		}
